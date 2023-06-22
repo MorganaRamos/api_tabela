@@ -1,23 +1,42 @@
-const mostrarDados = () => {
-    fetch(`https://jsonplaceholder.typicode.com/users`)
-    .then(response => response.json())
-    .then(json => {
+const mostrarDados = async () =>{
 
-        let dados = ''
+    const content = document.getElementById('content')
+    const retorno = await fetch (`https://jsonplaceholder.typicode.com/users`)
+    const usuarios = await retorno.json()
+    const usuariosHTML = usuarios.map(element =>
+        
+ `<tr>
+      <td>${element.id}</td>
+      <td>${element.name}</td>
+      <td>${element.email}</td>
+      <td>${element.username}</td>
+      <td>${element.website}</td>
+</tr>`
+)
 
-        json.forEach(usuario => {
-        dados += `<tr>
-            <th scope="row">${usuario.id}</th>
-            <td>Mark ${nome.id}</td>
-            <td>mark@gmail.com</td>
-            <td>mdo</td>
-            <td>mark.com</td>
-            <td>Av. perimetral, n 200 </td>
-          </tr>`
-        })
-        // usar no for each sempre a estrutura do que será requisitado logo depois da iteração
-    } 
-)}
+usuariosHTML.forEach((elementoHTML) => content.innerHTML += elementoHTML)
+}
 
-//chamada da função - caso seja chamada na tag d html não é necessário chamar aqui
-mostrarDados()
+// mostrarDados()
+
+
+// const mostrarDados = () => {
+//     fetch(`https://jsonplaceholder.typicode.com/users`)
+//     .then(response => response.json())
+//     .then(json => {
+
+//         let dados = ''
+
+//         json.forEach(usuario => {
+//         dados += `<tr>
+//             <td>${usuario.id}</td>
+//             <td>${usuario.name}</td>
+//             <td>${usuario.email}</td>
+//           </tr>`
+//         })
+//         // usar no for each sempre a estrutura do que será requisitado logo depois da iteração
+//     } 
+// )}
+
+// //chamada da função - caso seja chamada na tag d html não é necessário chamar aqui
+// mostrarDados()
