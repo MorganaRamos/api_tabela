@@ -1,23 +1,59 @@
-const mostrarDados = async () =>{
-
-    const content = document.getElementById('content')
+const buscarUsuarios = async () => {
     const retorno = await fetch (`https://jsonplaceholder.typicode.com/users`)
     const usuarios = await retorno.json()
-    const usuariosHTML = usuarios.map(element =>
-        
- `<tr>
-      <td>${element.id}</td>
-      <td>${element.name}</td>
-      <td>${element.email}</td>
-      <td>${element.username}</td>
-      <td>${element.website}</td>
-</tr>`
-)
-
-usuariosHTML.forEach((elementoHTML) => content.innerHTML += elementoHTML)
+    return usuarios
 }
 
-// mostrarDados()
+const usuarioToRowHTML = (usuario) =>{
+    return`<tr>
+           <td>${usuario.id}</td>
+           <td>${usuario.name}</td>
+           <td>${usuario.email}</td>
+           <td>${usuario.username}</td>
+           <td>${usuario.website}</td>
+        </tr>`
+}
+
+const mostrarDados = async () =>{
+
+        const usuarios = await buscarUsuarios()
+
+        const content = document.getElementById('content')
+        
+        const usuariosHTML = usuarios.map(usuarioToRowHTML)
+    
+    usuariosHTML.forEach((elementoHTML) => content.innerHTML += elementoHTML)
+    }
+
+
+
+
+
+
+
+
+
+
+// const mostrarDados = async () =>{
+
+//     const content = document.getElementById('content')
+//     const retorno = await fetch (`https://jsonplaceholder.typicode.com/users`)
+//     const usuarios = await retorno.json()
+//     const usuariosHTML = usuarios.map(element =>
+        
+//  `<tr>
+//       <td>${element.id}</td>
+//       <td>${element.name}</td>
+//       <td>${element.email}</td>
+//       <td>${element.username}</td>
+//       <td>${element.website}</td>
+// </tr>`
+// )
+
+// usuariosHTML.forEach((elementoHTML) => content.innerHTML += elementoHTML)
+// }
+
+
 
 
 // const mostrarDados = () => {
